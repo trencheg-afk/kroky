@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Кроки</string>
+    <string name="steps_label">кроків сьогодні</string>
+    <string name="history_title">Останні 7 днів</string>
+    <string name="change_goal">Змінити ціль</string>
+    <string name="goal_dialog_title">Денна ціль (кроків)</string>
+    <string name="save">Зберегти</string>
+    <string name="cancel">Скасувати</string>
+    <string name="no_sensor">У цьому телефоні немає датчика кроків, тому підрахунок неможливий.</string>
+    <string name="no_permission">Немає дозволу на «Фізичну активність». Надайте його в налаштуваннях програми, інакше кроки не рахуються.</string>
+    <string name="channel_name">Підрахунок кроків</string>
+    <string name="notif_title">Кроки сьогодні: %1$d</string>
+    <string name="notif_text">Підрахунок працює у фоні</string>
+    <string name="goal_format">Ціль: %1$d · виконано %2$d%%</string>
+    <string name="stats_format">%1$.2f км · %2$d ккал</string>
+</resources>

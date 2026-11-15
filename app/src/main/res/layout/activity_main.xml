@@ -91,6 +91,42 @@
             android:textStyle="bold" />
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/range7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/range_7" />
+
+            <Button
+                android:id="@+id/range30"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/range_30" />
+
+            <Button
+                android:id="@+id/rangeAll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/range_all" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textColor="#666666"
+            android:textSize="15sp" />
+
+        <LinearLayout
             android:id="@+id/history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

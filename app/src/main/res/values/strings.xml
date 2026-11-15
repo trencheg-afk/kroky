@@ -2,7 +2,11 @@
 <resources>
     <string name="app_name">Кроки</string>
     <string name="steps_label">кроків сьогодні</string>
-    <string name="history_title">Останні 7 днів</string>
+    <string name="history_title">Історія</string>
+    <string name="range_7">7 днів</string>
+    <string name="range_30">30 днів</string>
+    <string name="range_all">Увесь час</string>
+    <string name="summary_format">Разом: %1$d · у середньому %2$d на день</string>
     <string name="change_goal">Змінити ціль</string>
     <string name="goal_dialog_title">Денна ціль (кроків)</string>
     <string name="save">Зберегти</string>

@@ -26,6 +26,11 @@ public class MainActivity extends Activity {
     private static final double KCAL_PER_STEP = 0.04;
     private static final Locale UK = new Locale("uk");
 
+    /** Скільки днів показувати в історії; 0 означає «увесь час». */
+    private int historyDays = 7;
+    private View range7, range30, rangeAll;
+    private TextView summaryView;
+
     private TextView dateView, stepsView, goalView, statsView, warningView;
     private ProgressBar progress;
     private LinearLayout history;
@@ -46,6 +51,13 @@ public class MainActivity extends Activity {
         progress = findViewById(R.id.progress);
         history = findViewById(R.id.history);
         findViewById(R.id.changeGoal).setOnClickListener(v -> showGoalDialog());
+        summaryView = findViewById(R.id.summary);
+        range7 = findViewById(R.id.range7);
+        range30 = findViewById(R.id.range30);
+        rangeAll = findViewById(R.id.rangeAll);
+        range7.setOnClickListener(v -> setHistoryDays(7));
+        range30.setOnClickListener(v -> setHistoryDays(30));
+        rangeAll.setOnClickListener(v -> setHistoryDays(0));
 
         requestNeededPermissions();
     }
@@ -115,14 +127,27 @@ public class MainActivity extends Activity {
         warningView.setVisibility(View.VISIBLE);
     }
 
+    private void setHistoryDays(int days) {
+        historyDays = days;
+        refresh();
+    }
+
     private void fillHistory(int goal) {
+        // Вибраний період позначаємо неактивною кнопкою.
+        range7.setEnabled(historyDays != 7);
+        range30.setEnabled(historyDays != 30);
+        rangeAll.setEnabled(historyDays != 0);
+
         history.removeAllViews();
         SimpleDateFormat fmt = new SimpleDateFormat("EEE, d MMM", UK);
         int pad = dp(6);
-        for (int i = 0; i < 7; i++) {
+        int days = historyDays > 0 ? historyDays : StepStore.daysRecorded(this);
+        long total = 0;
+        for (int i = 0; i < days; i++) {
             Calendar day = Calendar.getInstance();
             day.add(Calendar.DAY_OF_YEAR, -i);
             int steps = StepStore.stepsOn(this, day);
+            total += steps;
 
             LinearLayout row = new LinearLayout(this);
             row.setOrientation(LinearLayout.HORIZONTAL);
@@ -151,6 +176,7 @@ public class MainActivity extends Activity {
 
             history.addView(row);
         }
+        summaryView.setText(getString(R.string.summary_format, (int) total, (int) (total / days)));
     }
 
     private void showGoalDialog() {

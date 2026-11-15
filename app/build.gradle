@@ -10,8 +10,30 @@ android {
         applicationId 'com.kroky.app'
         minSdk 26
         targetSdk 34
-        versionCode 1
-        versionName '1.0'
+        versionCode 2
+        versionName '1.1'
+    }
+
+    // Постійний ключ підпису: завдяки йому нові версії встановлюються поверх старих.
+    signingConfigs {
+        fixed {
+            def keyFile = file('kroky.p12')
+            def keyPass = 'kroky-app-key'
+            // Назву запису читаємо з самого файла, щоб не залежати від того, як її записала Windows.
+            def ks = java.security.KeyStore.getInstance('PKCS12')
+            keyFile.withInputStream { ks.load(it, keyPass.toCharArray()) }
+            storeFile keyFile
+            storeType 'pkcs12'
+            storePassword keyPass
+            keyAlias ks.aliases().nextElement()
+            keyPassword keyPass
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.fixed
+        }
     }
 
     compileOptions {

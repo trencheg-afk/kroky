@@ -33,6 +33,25 @@ final class StepStore {
         return stepsOn(c, Calendar.getInstance());
     }
 
+    /** Скільки днів минуло від першого записаного дня до сьогодні включно (щонайменше 1). */
+    static int daysRecorded(Context c) {
+        String first = null;
+        for (String key : prefs(c).getAll().keySet()) {
+            if (key.startsWith(DAY_PREFIX) && (first == null || key.compareTo(first) < 0)) {
+                first = key;
+            }
+        }
+        if (first == null) return 1;
+        Calendar day = Calendar.getInstance();
+        int days = 1;
+        // Ідемо назад від сьогодні до першого дня; обмеження захищає від зіпсованого запису.
+        while (dayKey(day).compareTo(first) > 0 && days < 3660) {
+            day.add(Calendar.DAY_OF_YEAR, -1);
+            days++;
+        }
+        return days;
+    }
+
     static int goal(Context c) {
         return prefs(c).getInt(KEY_GOAL, DEFAULT_GOAL);
     }
